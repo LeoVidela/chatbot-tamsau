@@ -73,15 +73,26 @@
 
   <script>
     const responses = {
-      "hola": "¡Hola! ¿En qué puedo ayudarte?",
-      "frecuencia servicio 1": "El servicio 1 pasa cada 15 minutos en horario pico y cada 30 minutos el resto del día.",
-      "frecuencia servicio 2": "El servicio 2 tiene una frecuencia de 20 minutos durante el día y 40 minutos por la noche.",
-      "dónde están las paradas": "Puedes ver las paradas en nuestro mapa aquí: [enlace al mapa]",
-      "cómo hago un reclamo": "Podés hacer un reclamo completando este formulario: [enlace al formulario]",
-      "horarios": "Los horarios están disponibles aquí: [enlace al PDF o página de horarios]",
-      "servicio fin de semana": "Sí, hay servicio los fines de semana pero con frecuencias reducidas.",
-      "objeto perdido": "Si perdiste algo, completá este formulario de objetos perdidos: [enlace o contacto]",
-    };
+      const responses = {
+        "hola": "¡Hola! ¿En qué puedo ayudarte?",
+        "frecuencia servicio 1": "El servicio 1 pasa cada 15 minutos en horario pico y cada 30 minutos el resto del día.",
+        "frecuencia servicio 2": "El servicio 2 tiene una frecuencia de 20 minutos durante el día y 40 minutos por la noche.",
+        "dónde están las paradas": "Podés ver las paradas en nuestro mapa: [enlace al mapa]",
+        "cómo hago un reclamo": "Completá este formulario para hacer tu reclamo: [enlace al formulario]",
+        "horarios": "Los horarios están disponibles en nuestra web: [enlace al PDF o sección de horarios]",
+        "servicio fin de semana": "Sí, hay servicio los fines de semana con frecuencias reducidas.",
+        "objeto perdido": "Reportá el objeto perdido aquí: [enlace o contacto]",
+
+        // NUEVAS PREGUNTAS:
+        "tarifas": "Podés consultar las tarifas actualizadas en esta página: [enlace a tarifas]",
+        "cómo recargar la tarjeta": "Podés recargar tu tarjeta en kioscos habilitados o desde la app de recarga virtual.",
+        "aceptan efectivo": "No, actualmente solo se acepta el uso de tarjeta para viajar.",
+        "tienen app": "Sí, podés descargar nuestra app oficial desde Google Play o App Store para ver horarios y recorridos.",
+        "último servicio": "El último servicio suele pasar a las 23:30 hs, pero puede variar según la línea.",
+        "atención al cliente": "Nuestro centro de atención responde de lunes a viernes de 8 a 18 hs al 0800-123-TAMSAU.",
+        "rutas disponibles": "Podés ver todas nuestras rutas en este enlace: [enlace al mapa de rutas o folleto]",
+      };
+
 
     function sendMessage() {
       const input = document.getElementById("user-input");
