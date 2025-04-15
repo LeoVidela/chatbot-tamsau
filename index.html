@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Asistente Virtual de Tamsau</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .chat-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .chat-header {
+      background: #0077cc;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      text-align: center;
+    }
+    .chat-box {
+      height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .message {
+      margin: 10px 0;
+    }
+    .bot {
+      color: #0077cc;
+    }
+    .user {
+      text-align: right;
+      color: #333;
+    }
+    .input-area {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    button {
+      background: #0077cc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Asistente Virtual de Tamsau</div>
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">👋 ¡Hola! Soy el Asistente Virtual de Tamsau. Pregúntame sobre horarios, paradas o cómo hacer reclamos.</div>
+    </div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." />
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const responses = {
+      "hola": "¡Hola! ¿En qué puedo ayudarte?",
+      "frecuencia servicio 1": "El servicio 1 pasa cada 15 minutos en horario pico y cada 30 minutos el resto del día.",
+      "frecuencia servicio 2": "El servicio 2 tiene una frecuencia de 20 minutos durante el día y 40 minutos por la noche.",
+      "dónde están las paradas": "Puedes ver las paradas en nuestro mapa aquí: [enlace al mapa]",
+      "cómo hago un reclamo": "Podés hacer un reclamo completando este formulario: [enlace al formulario]",
+      "horarios": "Los horarios están disponibles aquí: [enlace al PDF o página de horarios]",
+      "servicio fin de semana": "Sí, hay servicio los fines de semana pero con frecuencias reducidas.",
+      "objeto perdido": "Si perdiste algo, completá este formulario de objetos perdidos: [enlace o contacto]",
+    };
+
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const chatBox = document.getElementById("chat-box");
+      const userMessage = input.value.trim().toLowerCase();
+
+      if (!userMessage) return;
+
+      // Mostrar mensaje del usuario
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.textContent = input.value;
+      chatBox.appendChild(userMsg);
+
+      // Buscar respuesta
+      let response = "Lo siento, no tengo información sobre eso. ¿Podés reformular?";
+      for (let key in responses) {
+        if (userMessage.includes(key)) {
+          response = responses[key];
+          break;
+        }
+      }
+
+      // Mostrar respuesta del bot
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot";
+      botMsg.textContent = "🤖 " + response;
+      chatBox.appendChild(botMsg);
+
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
