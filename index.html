@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Asistente Virtual de Tamsau</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .chat-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .chat-header {
+      background: #0077cc;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      text-align: center;
+    }
+    .chat-box {
+      height: 400px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+    .message {
+      margin: 10px 0;
+    }
+    .bot {
+      color: #0077cc;
+    }
+    .user {
+      text-align: right;
+      color: #333;
+    }
+    .input-area {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    button {
+      background: #0077cc;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    a {
+      color: #0077cc;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Asistente Virtual de Tamsau</div>
+    <div class="chat-box" id="chat-box">
+      <div class="message bot">👋 ¡Hola! Soy el Asistente Virtual de Tamsau. Preguntame sobre horarios, paradas o cómo hacer reclamos.</div>
+    </div>
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí..." />
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
+
+    const responses = {
+      "hola": "¡Hola! ¿En qué puedo ayudarte?",
+      "frecuencia servicio 1": "El servicio 1 pasa cada 15 minutos en horario pico y cada 30 minutos el resto del día.",
+      "frecuencia servicio 2": "El servicio 2 tiene una frecuencia de 20 minutos durante el día y 40 minutos por la noche.",
+      "dónde están las paradas": "Podés ver las paradas en nuestro mapa: [enlace al mapa]",
+      "cómo hago un reclamo": "Completá este formulario para hacer tu reclamo: [enlace al formulario]",
+      "horarios": "Los horarios están disponibles en nuestra web: [enlace a horarios]",
+      "servicio fin de semana": "Sí, hay servicio los fines de semana con frecuencias reducidas.",
+      "objeto perdido": "Reportá el objeto perdido aquí: [enlace a objeto perdido]",
+      "tarifas": "Podés consultar las tarifas actualizadas en esta página: [enlace a tarifas]",
+      "cómo recargar la tarjeta": "Podés recargar tu tarjeta en kioscos habilitados o desde la app de recarga virtual.",
+      "aceptan efectivo": "No, actualmente solo se acepta el uso de tarjeta para viajar.",
+      "tienen app": "Sí, podés descargar nuestra app oficial desde Google Play o App Store para ver horarios y recorridos.",
+      "último servicio": "El último servicio suele pasar a las 23:30 hs, pero puede variar según la línea.",
+      "atención al cliente": "Nuestro centro de atención responde de lunes a viernes de 8 a 18 hs al 0800-123-TAMSAU.",
+      "rutas disponibles": "Podés ver todas nuestras rutas en este enlace: [enlace a rutas]",
+    };
+
+    const links = {
+      "[enlace al mapa]": "<a href='https://tamsau.com/mapa' target='_blank'>Mapa de paradas</a>",
+      "[enlace al formulario]": "<a href='https://tamsau.com/reclamos' target='_blank'>Formulario de reclamos</a>",
+      "[enlace a horarios]": "<a href='https://tamsau.com/horarios.pdf' target='_blank'>Ver horarios</a>",
+      "[enlace a tarifas]": "<a href='https://tamsau.com/tarifas' target='_blank'>Tarifas actuales</a>",
+      "[enlace a objeto perdido]": "<a href='https://tamsau.com/objetos-perdidos' target='_blank'>Objetos perdidos</a>",
+      "[enlace a rutas]": "<a href='https://tamsau.com/rutas' target='_blank'>Ver rutas disponibles</a>"
+    };
+
+    function sendMessage() {
+      const userMessage = input.value.trim().toLowerCase();
+      if (!userMessage) return;
+
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user";
+      userMsg.textContent = input.value;
+      chatBox.appendChild(userMsg);
+
+      let response = "Lo siento, no tengo información sobre eso. ¿Podés reformular?";
+      for (let key in responses) {
+        const keyWords = key.split(" ");
+        const userWords = userMessage.split(" ");
+
+        // Detecta si al menos una palabra clave del bot está en la frase del usuario
+        const match = keyWords.some(word => userWords.includes(word));
+
+        if (match) {
+          response = responses[key];
+          break;
+        }
+      }
+
+      // Reemplazar etiquetas por links reales
+      for (let tag in links) {
+        if (response.includes(tag)) {
+          response = response.replace(tag, links[tag]);
+        }
+      }
+
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot";
+      botMsg.innerHTML = "🤖 " + response;
+      chatBox.appendChild(botMsg);
+
+      input.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
