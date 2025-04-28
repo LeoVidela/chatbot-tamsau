@@ -19,7 +19,7 @@
       overflow: hidden;
     }
     .chat-header {
-      background: #0077cc;
+      background: #2ecc71;
       color: white;
       padding: 15px;
       font-size: 18px;
@@ -34,7 +34,7 @@
       margin: 10px 0;
     }
     .bot {
-      color: #0077cc;
+      color: #2ecc71;
     }
     .user {
       text-align: right;
@@ -51,14 +51,14 @@
       outline: none;
     }
     button {
-      background: #0077cc;
+      background: #2ecc71;
       color: white;
       border: none;
       padding: 10px 20px;
       cursor: pointer;
     }
     a {
-      color: #0077cc;
+      color: #2ecc71;
       text-decoration: underline;
     }
   </style>
@@ -126,7 +126,6 @@
         const keyWords = key.split(" ");
         const userWords = userMessage.split(" ");
 
-        // Detecta si al menos una palabra clave del bot está en la frase del usuario
         const match = keyWords.some(word => userWords.includes(word));
 
         if (match) {
@@ -135,7 +134,6 @@
         }
       }
 
-      // Reemplazar etiquetas por links reales
       for (let tag in links) {
         if (response.includes(tag)) {
           response = response.replace(tag, links[tag]);
@@ -153,3 +151,4 @@
   </script>
 </body>
 </html>
+
